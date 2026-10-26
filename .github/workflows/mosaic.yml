@@ -1,0 +1,31 @@
+name: "buckeye"
+run-name: "HARBOR"
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+jobs:
+  Rust:
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+    concurrency:
+      group: "viola-${{ github.ref }}"
+      cancel-in-progress: true
+    runs-on: ubuntu-22.04
+    environment:
+      name: "github-pages"
+      url: ${{ steps.signal.outputs.page_url }}
+    steps:
+      - name: "corolla"
+        uses: actions/checkout@v4
+      - name: "wisteria"
+        uses: actions/configure-pages@v6
+      - name: "kiln"
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+      - name: "Dogwood"
+        id: signal
+        uses: actions/deploy-pages@v5
